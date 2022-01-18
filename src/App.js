@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+const dishes = ['Macrona','Salamon']
+
+function Header(props) {
+  return (
+    <header>
+      <h1> {props.name}'s Kitchen</h1>
+    </header>
+  );
+}
+
+function Main(props) {
+  return (
+    <section>
+      <ul>
+        {props.dishes.map((dish) => (
+          console.log(dish),
+          <li>{dish}</li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+function Footer(params) {
+  return (
+    <header>
+      <h1>Footer</h1>
+    </header>
+  );
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header name="Abdo"/>
+      <Main dishes={dishes} />
+      <Footer />
     </div>
-  );
+  ) ;
+                      
 }
 
 export default App;
