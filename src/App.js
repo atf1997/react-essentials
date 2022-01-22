@@ -1,6 +1,8 @@
 import "./App.css";
+import logo from"./logo.svg";
 
-const dishes = ['Macrona','Salamon']
+const dishes = ["Madroña", "Salmon"];
+const dishObjects = dishes.map((dish, i) => ({ id: i, title: dish }));
 
 function Header(props) {
   return (
@@ -14,31 +16,30 @@ function Main(props) {
   return (
     <section>
       <ul>
-        {props.dishes.map((dish) => (
-          console.log(dish),
-          <li>{dish}</li>
+        {props.dishes.map((dishObject) => (
+          <ul key={dishObject.id}>{dishObject.title}</ul>
         ))}
       </ul>
+      <img src={logo} height={200} alt="image of dish" />
     </section>
   );
 }
 function Footer(params) {
   return (
-    <header>
-      <h1>Footer</h1>
-    </header>
+    <footer>
+      <p>Copyright {params.year}</p>
+    </footer>
   );
 }
 
 function App() {
   return (
     <div className="App">
-      <Header name="Abdo"/>
-      <Main dishes={dishes} />
-      <Footer />
+      <Header name="Abdo" />
+      <Main dishes={dishObjects} />
+      <Footer year={new Date().getFullYear()} />
     </div>
-  ) ;
-                      
+  );
 }
 
 export default App;
