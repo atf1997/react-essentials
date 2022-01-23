@@ -1,18 +1,29 @@
 import { useReducer, useState, useEffect } from "react";
 import "./App.css";
 
-function App({ user }) {
+function App({ login }) {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    fetch(`https://api.github.com/users/${user}`)
+    if (!login) {
+      return;
+    }
+    setLoading(true);
+    fetch(`https://api.github.com/users/${login}`)
       .then((response) => response.json())
-      .then(setData);
-  }, []);
+      .then(setData)
+      .then(() => setLoading(false))
+      .catch(setError);
+  }, [login]);
 
-  if (user != null)
+  if (loading) return <h1>loading ...</h1>;
+  if (error) return <h1>error happened</h1>;
+  if (data != null)
     return (
       <>
-        <h1>{JSON.stringify(data)}</h1>
+        <h1>{data.name}</h1>
+        <img src={data.avatar_url} alt={data.login} />
       </>
     );
   return (
